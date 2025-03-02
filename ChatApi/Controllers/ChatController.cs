@@ -14,6 +14,12 @@ public class ChatController : ControllerBase
         _logger = logger;
     }
 
+    [HttpGet]
+    public IActionResult Get()
+    {
+        return Ok("Chat API is running");
+    }
+
     [HttpPost]
     public async Task<ActionResult<ChatResponse>> PostMessage([FromBody] ChatRequest request)
     {
@@ -25,7 +31,7 @@ public class ChatController : ControllerBase
             // Here you can integrate with an AI service or implement your own logic
             var response = new ChatResponse
             {
-                Text = $"You said: {request.Message}",
+                Text = $"You really said: {request.Message} (at {DateTime.Now:hh:mm:ss} on {DateTime.Now.DayOfWeek})",
                 Sender = "bot"
             };
 
